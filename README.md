@@ -1,4 +1,4 @@
-# YouTube Clone  
+# Video Streaming Website 
 
 A YouTube Clone built with **React.js** and **YouTube Data API** to fetch and display real-time video content. It includes video search, category filtering, and a responsive UI for a seamless user experience.  
 
