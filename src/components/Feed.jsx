@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import FeedShrimmer from "../ui/Shrimmer/FeedShrimmer";
-import { Link } from "react-router";
-import { date, views } from "../../functions";
+import Card from "../ui/Card";
 
 function Feed({ categoryId }) {
   const [data, setData] = useState(null);
@@ -19,67 +18,51 @@ function Feed({ categoryId }) {
   }, [categoryId]);
 
   return (
-    <>
-      {data ? (
-        data.map((el, i) => {
-          // console.log(el);
-          const {
-            snippet: {
-              channelTitle,
-              title,
-              publishedAt,
-              thumbnails: {
-                high: { url },
+    <div className="2500px:w-[2200px] 2500px:mx-auto w-full px-4 h-dvh overflow-y-auto no-scrollbar">
+      <div className=" grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 pt-20">
+        {data ? (
+          data.map((el) => {
+            const {
+              snippet: {
+                channelTitle,
+                title,
+                publishedAt,
+                thumbnails: {
+                  high: { url },
+                },
               },
-            },
-            statistics: { viewCount },
-            id,
-          } = el;
+              statistics: { viewCount },
+              id,
+            } = el;
 
-          return (
-            <Link
-              to={`/player/${id}/${el.snippet.categoryId}`}
-              className="848px:w-2xs 496px:w-[240px] w-[90%]"
-              key={id}
-            >
-              <div className="h-[200px] overflow-hidden rounded-sm">
-                <img
-                  src={url}
-                  alt="thumbnails"
-                  className="w-full h-full hover:cursor-pointer"
-                />
-              </div>
-              <div className="flex flex-col items-between mt-4 gap-1">
-                <h1 className="font-bold 448px:text-[16px] text-[14px]">
-                  {title}
-                </h1>
-                <p className="font-medium tracking-wide 448px:text-[16px] text-[14px]">
-                  {channelTitle}
-                </p>
-                <div className="flex gap-4">
-                  <p className="448px:text-[16px] text-[14px]">
-                    {views(viewCount ? viewCount : 0)} views &bull;{" "}
-                    {date(publishedAt)}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          );
-        })
-      ) : (
-        <>
-          <FeedShrimmer />
-          <FeedShrimmer />
-          <FeedShrimmer />
-          <FeedShrimmer />
-          <FeedShrimmer />
-          <FeedShrimmer />
-          <FeedShrimmer />
-          <FeedShrimmer />
-          <FeedShrimmer />
-        </>
-      )}
-    </>
+            return (
+              <Card
+                key={id}
+                id={id}
+                categoryId={el.snippet.categoryId}
+                url={url}
+                title={title}
+                channelTitle={channelTitle}
+                viewCount={viewCount}
+                publishedAt={publishedAt}
+              />
+            );
+          })
+        ) : (
+          <>
+            <FeedShrimmer />
+            <FeedShrimmer />
+            <FeedShrimmer />
+            <FeedShrimmer />
+            <FeedShrimmer />
+            <FeedShrimmer />
+            <FeedShrimmer />
+            <FeedShrimmer />
+            <FeedShrimmer />
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 

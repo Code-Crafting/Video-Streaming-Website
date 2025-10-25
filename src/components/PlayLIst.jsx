@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { views } from "../../functions";
+import { addViewsSuffix } from "../lib/addViewsSuffix";
 import PlayListShrimmer from "../ui/Shrimmer/PlaylistShrimmer";
 
 function PlayList({ categoryId }) {
@@ -53,7 +53,7 @@ function PlayList({ categoryId }) {
                 <h1 className="font-bold">{title}</h1>
                 <p className="font-medium tracking-wide">{channelTitle}</p>
                 <div className="flex gap-4">
-                  <p>{views(viewCount ? viewCount : 0)} views</p>
+                  <p>{addViewsSuffix(viewCount ? viewCount : 0)} views</p>
                 </div>
               </div>
             </Link>

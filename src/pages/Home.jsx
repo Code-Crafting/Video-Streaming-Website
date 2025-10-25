@@ -1,28 +1,21 @@
 import { useContext, useState } from "react";
 import Aside from "../components/Aside";
 import Feed from "../components/Feed";
+import { HideText } from "../contexts/HideText";
 
 function Home() {
-  return (
-    <>
-      <div className="relative">
-        <div className="absolute top-0 left-0 flex px-4 gap-4 z-0">
-          <Aside />
-          {/* <div className="848px:bg-gray-100 bg-white w-full h-dvh flex flex-wrap 848px:justify-start justify-center sm:pt-24 pt-20 pb-4 848px:pl-4 pl-0  gap-4  overflow-y-scroll no-scrollbar overscroll-auto">
-            {!query ? (
-              <Feed categoryId={id} />
-            ) : (
-              <SearchedContent
-                debouncedQuery={debouncedQuery}
-                setQuery={setQuery}
-              />
-            )}
-          </div> */}
+  const [hideAsideText] = useContext(HideText);
+  const [activeId, setActiveId] = useState(0);
 
-          {/* <Feed categoryId={id} /> */}
+  return (
+    <div className="relative ">
+      <div className="w-full absolute top-0 left-0 z-0 ">
+        <div className="flex bg-gray-200 ">
+          <Aside activeId={activeId} setActiveId={setActiveId} />
+          <Feed categoryId={activeId} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

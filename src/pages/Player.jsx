@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
-import { date, views } from "../../functions";
+import { addViewsSuffix } from "../lib/addViewsSuffix";
+import { getReadableDate } from "../lib/getReadableData";
 import { useContext, useEffect, useState } from "react";
 import dislike from "../assets/dislike.png";
 import like from "../assets/like.png";
@@ -95,15 +96,18 @@ function Player() {
                     </h1>
                     <div className="flex sm:flex-row flex-col sm:items-center justify-between gap-4">
                       <p>
-                        {views(videoDetails.statistics.viewCount)} views &bull;{" "}
-                        {date(videoDetails.snippet.publishedAt)}
+                        {addViewsSuffix(videoDetails.statistics.viewCount)}{" "}
+                        views &bull;{" "}
+                        {getReadableDate(videoDetails.snippet.publishedAt)}
                       </p>
 
                       <div className="flex gap-4">
                         <VideoReview
                           imgSrc={like}
                           imgAlt="like"
-                          stats={views(videoDetails.statistics.likeCount)}
+                          stats={addViewsSuffix(
+                            videoDetails.statistics.likeCount
+                          )}
                         />
                         <VideoReview
                           imgSrc={dislike}
@@ -113,7 +117,7 @@ function Player() {
                         <VideoReview
                           imgSrc={comment}
                           imgAlt="comment"
-                          stats={views(
+                          stats={addViewsSuffix(
                             videoDetails
                               ? videoDetails.statistics.commentCount
                               : 0

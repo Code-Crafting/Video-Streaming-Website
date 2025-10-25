@@ -6,12 +6,11 @@ import { Link } from "react-router";
 import { useDebounce } from "../hooks/useDebounce";
 import { navRightItems } from "../constants/navRightItems";
 import { useContext } from "react";
-import { HideText } from "../contexts/HIdeText";
+import { HideText } from "../contexts/HideText";
 
 function Navbar() {
   const [query, debouncedQuery, setQuery] = useDebounce();
   const [_, setHideAsideText] = useContext(HideText);
-
   return (
     <div className="fixed w-full z-1 bg-white shadow-nav">
       <div className="flex justify-between items-center sm:py-4 py-3 px-4">

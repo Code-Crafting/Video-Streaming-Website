@@ -1,4 +1,4 @@
-import { views } from "../../functions";
+// import { views } from "../../functions";
 import dislike from "../assets/dislike.png";
 import like from "../assets/like.png";
 

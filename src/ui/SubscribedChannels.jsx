@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { HideText } from "../contexts/HIdeText";
+import { HideText } from "../contexts/HideText";
 
 const SubscribedChannels = ({ data }) => {
   const [hideAsideText] = useContext(HideText);
