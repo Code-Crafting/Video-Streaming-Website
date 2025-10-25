@@ -17,6 +17,7 @@ function App() {
       // setDebouncedQuery={setDebouncedQuery}
       // isTrue={true}
       />
+      {/* <Home /> */}
       {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/player/:id/:categoryId" element={<Player />} />

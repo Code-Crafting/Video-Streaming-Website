@@ -8,6 +8,10 @@
   --breakpoint-496px: 31rem;
 }
 
+.con {
+  @apply max-w-[1500px] mx-auto px-2 sm:py-4 py-3;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

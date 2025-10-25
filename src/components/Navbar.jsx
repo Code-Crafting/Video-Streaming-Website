@@ -1,45 +1,20 @@
-import menu from "../assets/navbar/menu.png";
-import logo from "../assets/navbar/logo.png";
-import search from "../assets/navbar/search.png";
-import upload from "../assets/navbar/upload.png";
-import notification from "../assets/navbar/notification.png";
-import more from "../assets/navbar/more.png";
+import { BiMenuAltLeft } from "react-icons/bi";
+import logo from "../assets/logo/logo.png";
+import { IoSearchOutline } from "react-icons/io5";
 import userProfile from "../assets/navbar/user_profile.jpg";
 import { Link } from "react-router";
-import { useEffect } from "react";
+import { useDebounce } from "../hooks/useDebounce";
+import { navRightItems } from "../constants/navRightItems";
 
-function Navbar(
-  {
-    // setHideAsideText,
-    // setQuery,
-    // query,
-    // setDebouncedQuery,
-    // isTrue,
-  }
-) {
-  // useEffect(() => {
-  //   const handler = setTimeout(() => {
-  //     setDebouncedQuery(query);
-  //   }, 500);
-
-  //   return () => clearTimeout(handler);
-  // }, [query]);
+function Navbar() {
+  const [query, debouncedQuery, setQuery] = useDebounce();
 
   return (
-    <div className="fixed w-full z-1 bg-white">
-      <div className=" flex justify-between items-center sm:py-4 py-3 sm:px-8 px-4 shadow-nav">
-        <div className="flex gap-4">
-          {/* {isTrue ? (
-            <img
-              src={menu}
-              alt="menu"
-              className="w-[20px] h-[16px] hover:cursor-pointer 848px:block hidden"
-              // onClick={() => setHideAsideText((perv) => (perv ? false : true))}
-            />
-          ) : (
-            <></>
-          )} */}
-
+    <div className="fixed w-full z-1 bg-white shadow-nav">
+      <div className="flex justify-between items-center sm:py-4 py-3 px-4">
+        {/* left */}
+        <div className="flex gap-4 items-center">
+          <BiMenuAltLeft className="text-2xl text-gray-600 cursor-pointer" />
           <Link to="/">
             <img
               src={logo}
@@ -49,41 +24,32 @@ function Navbar(
           </Link>
         </div>
 
+        {/* middle */}
         <div className="flex items-center gap-2 sm:w-sm 448px:w-3xs w-[180px] sm:h-[32px] h-[28px] border-gray-600 border rounded-2xl px-4 ">
           <input
             type="text"
-            // value={query}
+            value={query}
             placeholder="Search"
             className="w-full outline-none hover:cursor-pointer text-[12px] 448px:text-[16px]"
-            // onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => setQuery(e.target.value)}
           />
-          <img
-            src={search}
-            alt="search"
-            className="sm:w-[20px] sm:h-[20px] 448px:w-[16px] 448px:h-[16px] w-[12px] h-[12px] hover:cursor-pointer"
-          />
+          <IoSearchOutline className="text-2xl text-gray-400 hover:text-red-600 cursor-pointer" />
         </div>
 
+        {/* right */}
         <div className="flex justify-between items-center gap-6">
-          <img
-            src={upload}
-            alt="upload"
-            className="w-[25px] h-[25px] hover:cursor-pointer 848px:block hidden"
-          />
-          <img
-            src={more}
-            alt="more"
-            className="w-[25px] h-[25px] hover:cursor-pointer 848px:block hidden"
-          />
-          <img
-            src={notification}
-            alt="notification"
-            className="w-[25px] h-[25px] hover:cursor-pointer 848px:block hidden"
-          />
+          {navRightItems.items.map(({ id, icon: Icon, style }) => (
+            <Icon
+              key={id}
+              className={`${navRightItems.commonStyle} ${
+                style && style
+              } text-gray-500`}
+            />
+          ))}
           <img
             src={userProfile}
             alt="userProfile"
-            className="rounded-full w-[25px] h-[25px]  hover:cursor-pointer"
+            className="rounded-full w-[24px] aspect-square  hover:cursor-pointer"
           />
         </div>
       </div>
