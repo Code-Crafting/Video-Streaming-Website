@@ -1,45 +1,31 @@
-import { category } from "../constants/category";
+import { useContext } from "react";
+import { HideText } from "../contexts/HIdeText";
 
-const AsideCategory = ({ setId, setActiveId, activeId }) => {
+const AsideCategory = ({ data, setActiveId, activeId }) => {
+  const [hideAsideText] = useContext(HideText);
+  const { id, icon: Icon, name } = data;
   return (
-    <div>
-      {category.map((el, i) => {
-        const { id, name, icon: Icon } = el;
-        return (
-          <div className="flex gap-4 items-center" key={i} id={el.id}>
-            <div className="w-[24px]">
-              <Icon
-                className="w-[20px] aspect-square hover:cursor-pointer"
-                onClick={() => {
-                  setId(id);
-                  setActiveId(id);
-                }}
-              />
-              <div
-                className={`${
-                  activeId === el.id ? "absolute" : ""
-                } h-[2px] bg-red-600 mt-1 rounded-sm  `}
-              ></div>
-            </div>
+    <div className="flex gap-4 items-center" id={id}>
+      <div>
+        <Icon
+          className="relative text-xl cursor-pointer text-gray-600"
+          onClick={() => setActiveId(id)}
+        />
+        <div
+          className={`${
+            activeId === data.id ? "absolute" : "hidden"
+          }  w-[20px] h-[3px] bg-red-600 mt-1 rounded-sm  `}
+        ></div>
+      </div>
 
-            {hideAsideText ? (
-              ""
-            ) : (
-              <div className="w-[208px]">
-                <p
-                  onClick={(e) => {
-                    setId(el.id);
-                    setActiveId(el.id);
-                  }}
-                  className="hover:cursor-pointer text-gray-600"
-                >
-                  {el.name}
-                </p>
-              </div>
-            )}
-          </div>
-        );
-      })}
+      <p
+        onClick={() => setActiveId(id)}
+        className={`hover:cursor-pointer text-gray-600 ${
+          hideAsideText && "hidden"
+        }`}
+      >
+        {name}
+      </p>
     </div>
   );
 };

@@ -5,16 +5,22 @@ import userProfile from "../assets/navbar/user_profile.jpg";
 import { Link } from "react-router";
 import { useDebounce } from "../hooks/useDebounce";
 import { navRightItems } from "../constants/navRightItems";
+import { useContext } from "react";
+import { HideText } from "../contexts/HIdeText";
 
 function Navbar() {
   const [query, debouncedQuery, setQuery] = useDebounce();
+  const [_, setHideAsideText] = useContext(HideText);
 
   return (
     <div className="fixed w-full z-1 bg-white shadow-nav">
       <div className="flex justify-between items-center sm:py-4 py-3 px-4">
         {/* left */}
         <div className="flex gap-4 items-center">
-          <BiMenuAltLeft className="text-2xl text-gray-600 cursor-pointer" />
+          <BiMenuAltLeft
+            className="text-2xl text-gray-600 cursor-pointer"
+            onClick={() => setHideAsideText((prev) => !prev)}
+          />
           <Link to="/">
             <img
               src={logo}

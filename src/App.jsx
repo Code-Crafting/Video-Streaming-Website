@@ -4,24 +4,30 @@ import Navbar from "./components/Navbar";
 import Player from "./pages/Player";
 import { useState } from "react";
 import { SearchContext } from "./contexts/SearchContext";
+import { HideText } from "./contexts/HIdeText";
 
 function App() {
   // const [query, setQuery] = useState("");
   // const [debouncedQuery, setDebouncedQuery] = useState("");
+
+  const [hideAsideText, setHideAsideText] = useState(false);
+
   return (
     <>
-      <Navbar
-      // setHideAsideText={setHideAsideText}
-      // query={query}
-      // setQuery={setQuery}
-      // setDebouncedQuery={setDebouncedQuery}
-      // isTrue={true}
-      />
-      {/* <Home /> */}
-      {/* <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/player/:id/:categoryId" element={<Player />} />
-      </Routes> */}
+      <HideText.Provider value={[hideAsideText, setHideAsideText]}>
+        <Navbar
+        // setHideAsideText={setHideAsideText}
+        // query={query}
+        // setQuery={setQuery}
+        // setDebouncedQuery={setDebouncedQuery}
+        // isTrue={true}
+        />
+        {/* <Home /> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/player/:id/:categoryId" element={<Player />} /> */}
+        </Routes>
+      </HideText.Provider>
     </>
   );
 }
