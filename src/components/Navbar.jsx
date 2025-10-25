@@ -1,42 +1,44 @@
-import menu from "../assets/menu.png";
-import logo from "../assets/logo.png";
-import search from "../assets/search.png";
-import upload from "../assets/upload.png";
-import notification from "../assets/notification.png";
-import more from "../assets/more.png";
-import userProfile from "../assets/user_profile.jpg";
+import menu from "../assets/navbar/menu.png";
+import logo from "../assets/navbar/logo.png";
+import search from "../assets/navbar/search.png";
+import upload from "../assets/navbar/upload.png";
+import notification from "../assets/navbar/notification.png";
+import more from "../assets/navbar/more.png";
+import userProfile from "../assets/navbar/user_profile.jpg";
 import { Link } from "react-router";
 import { useEffect } from "react";
 
-function Navbar({
-  setHideAsideText,
-  setQuery,
-  query,
-  setDebouncedQuery,
-  isTrue,
-}) {
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedQuery(query);
-    }, 500);
+function Navbar(
+  {
+    // setHideAsideText,
+    // setQuery,
+    // query,
+    // setDebouncedQuery,
+    // isTrue,
+  }
+) {
+  // useEffect(() => {
+  //   const handler = setTimeout(() => {
+  //     setDebouncedQuery(query);
+  //   }, 500);
 
-    return () => clearTimeout(handler);
-  }, [query]);
+  //   return () => clearTimeout(handler);
+  // }, [query]);
 
   return (
     <div className="fixed w-full z-1 bg-white">
       <div className=" flex justify-between items-center sm:py-4 py-3 sm:px-8 px-4 shadow-nav">
         <div className="flex gap-4">
-          {isTrue ? (
+          {/* {isTrue ? (
             <img
               src={menu}
               alt="menu"
               className="w-[20px] h-[16px] hover:cursor-pointer 848px:block hidden"
-              onClick={() => setHideAsideText((perv) => (perv ? false : true))}
+              // onClick={() => setHideAsideText((perv) => (perv ? false : true))}
             />
           ) : (
             <></>
-          )}
+          )} */}
 
           <Link to="/">
             <img
@@ -50,10 +52,10 @@ function Navbar({
         <div className="flex items-center gap-2 sm:w-sm 448px:w-3xs w-[180px] sm:h-[32px] h-[28px] border-gray-600 border rounded-2xl px-4 ">
           <input
             type="text"
-            value={query}
+            // value={query}
             placeholder="Search"
             className="w-full outline-none hover:cursor-pointer text-[12px] 448px:text-[16px]"
-            onChange={(e) => setQuery(e.target.value)}
+            // onChange={(e) => setQuery(e.target.value)}
           />
           <img
             src={search}

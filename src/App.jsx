@@ -1,22 +1,27 @@
 import { Route, Routes } from "react-router";
-import Home from "./Components/Home";
-import Navbar from "./Components/Navbar";
-import Player from "./Components/Player";
+import Home from "./pages/Home";
+import Navbar from "./components/Navbar";
+import Player from "./pages/Player";
 import { useState } from "react";
-import { SearchContext } from "./Contexts/SearchContext";
+import { SearchContext } from "./contexts/SearchContext";
 
 function App() {
-  const [query, setQuery] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState("");
+  // const [query, setQuery] = useState("");
+  // const [debouncedQuery, setDebouncedQuery] = useState("");
   return (
-    <SearchContext.Provider
-      value={[query, setQuery, debouncedQuery, setDebouncedQuery]}
-    >
-      <Routes>
+    <>
+      <Navbar
+      // setHideAsideText={setHideAsideText}
+      // query={query}
+      // setQuery={setQuery}
+      // setDebouncedQuery={setDebouncedQuery}
+      // isTrue={true}
+      />
+      {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/player/:id/:categoryId" element={<Player />} />
-      </Routes>
-    </SearchContext.Provider>
+      </Routes> */}
+    </>
   );
 }
 

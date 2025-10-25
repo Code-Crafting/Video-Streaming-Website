@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { views } from "../../functions";
-import PlayListShrimmer from "./Shrimmer/PlaylistShrimmer";
+import PlayListShrimmer from "../ui/Shrimmer/PlaylistShrimmer";
 
 function PlayList({ categoryId }) {
   const [data, setData] = useState(null);

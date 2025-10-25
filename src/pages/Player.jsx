@@ -6,12 +6,12 @@ import like from "../assets/like.png";
 import share from "../assets/share.png";
 import save from "../assets/save.png";
 import comment from "../assets/messages.png";
-import VideoReview from "./VideoReview";
-import CommentSec from "../Components/CommentSec";
-import Navbar from "../Components/Navbar";
-import SearchedContent from "../Components/SearchedContent";
-import { SearchContext } from "../Contexts/SearchContext";
-import PlayList from "../Components/PlayLIst";
+import VideoReview from "../ui/VideoReview";
+import CommentSec from "../components/CommentSec";
+import Navbar from "../components/Navbar";
+import SearchedContent from "../components/SearchedContent";
+import { SearchContext } from "../contexts/SearchContext";
+import PlayList from "../components/PlayLIst";
 
 function Player() {
   const { id, categoryId } = useParams();
