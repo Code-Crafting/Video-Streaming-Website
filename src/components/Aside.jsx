@@ -12,7 +12,7 @@ function Aside({ activeId, setActiveId }) {
     <div
       className={`h-dvh bg-white ${
         !hideAsideText ? "w-56" : "min-w-max"
-      } flex pb-4 pt-20 px-4 flex-col gap-4 overflow-y-scroll no-scrollbar overscroll-auto 848px:flex`}
+      } md:flex hidden pb-4 pt-20 px-4 flex-col gap-4 overflow-y-scroll no-scrollbar overscroll-auto 848px:flex`}
     >
       {/* categories */}
       <div className="flex flex-col gap-4">

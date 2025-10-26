@@ -10,10 +10,11 @@ const Card = ({
   viewCount,
   publishedAt,
   url,
+  fn,
 }) => {
   return (
-    <Link to={`/player/${id}/${categoryId}`}>
-      <div className="h-[200px] overflow-hidden rounded-sm">
+    <Link to={`/player/${id}/${categoryId}`} onClick={fn}>
+      <div className="aspect-video overflow-hidden sm:rounded-sm">
         <img
           src={url}
           alt="thumbnails"
@@ -25,12 +26,14 @@ const Card = ({
         <p className="font-medium tracking-wide 448px:text-[16px] text-[14px]">
           {channelTitle}
         </p>
-        <div className="flex gap-4">
-          <p className="448px:text-[16px] text-[14px]">
-            {addViewsSuffix(viewCount ? viewCount : 0)} views &bull;{" "}
-            {getReadableDate(publishedAt)}
-          </p>
-        </div>
+        {viewCount && publishedAt && (
+          <div className="flex gap-4">
+            <p className="448px:text-[16px] text-[14px]">
+              {addViewsSuffix(viewCount ? viewCount : 0)} views &bull;{" "}
+              {getReadableDate(publishedAt)}
+            </p>
+          </div>
+        )}
       </div>
     </Link>
   );

@@ -14,7 +14,7 @@ function PlayList({ categoryId }) {
   }, [categoryId]);
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-3  no-scrollbar lg:overflow-y-auto pb-2">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-3 no-scrollbar lg:overflow-y-auto pb-2">
       {data ? (
         data.map((el) => {
           const {

@@ -1,24 +1,21 @@
 import { useParams } from "react-router";
-import { addViewsSuffix } from "../lib/addViewsSuffix";
-import { getReadableDate } from "../lib/getReadableData";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CommentSec from "../components/CommentSec";
 import SearchedContent from "../components/SearchedContent";
-import { SearchContext } from "../contexts/SearchContext";
 import PlayList from "../components/PlayLIst";
 import Video from "../ui/Video";
-import { TbArrowAutofitContent } from "react-icons/tb";
 import { useFetch } from "../hooks/useFetch";
 import VideoDetails from "../ui/VideoDetails";
 import ChannelDetails from "../ui/ChannelDetails";
+import { SearchContext } from "../contexts/SearchContext";
 
 function Player() {
   const { id, categoryId } = useParams();
-
   const [videoDetails, fetchVideosData] = useFetch(null);
   const [channelDetails, fetchChannelData] = useFetch(null);
   const [commentsDetails, fetchCommentData] = useFetch(null);
   const [commentOn, setCommentOn] = useState(false);
+  const [debouncedQuery] = useContext(SearchContext);
 
   // getting video details
   useEffect(() => {
@@ -47,51 +44,54 @@ function Player() {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto h-dvh grid lg:grid-cols-[60%_40%] sm:pt-24 pt-20 gap-4 sm:px-6">
-        <div className="lg:overflow-y-scroll no-scrollbar lg:overscroll-auto">
-          {/* video */}
-          <Video id={id} />
+      {!debouncedQuery ? (
+        <div className="max-w-7xl h-dvh mx-auto grid lg:grid-cols-[60%_40%] sm:pt-24 pt-16 gap-4 sm:px-6">
+          <div className=" no-scrollbar lg:overscroll-y-auto">
+            {/* video */}
+            <Video id={id} />
 
-          {/* video details */}
-          {videoDetails && (
-            <VideoDetails data={videoDetails[0]} setCommentOn={setCommentOn} />
-          )}
+            {/* video details */}
+            {videoDetails && (
+              <VideoDetails
+                data={videoDetails[0]}
+                setCommentOn={setCommentOn}
+              />
+            )}
 
-          <hr className={`mt-4 rounded-md text-gray-600`} />
+            <hr className={`mt-4 rounded-md text-gray-600`} />
 
-          {/* channelDetails */}
-          {channelDetails && (
-            <ChannelDetails
-              data={channelDetails[0]}
-              videoDetails={videoDetails[0]}
-            />
-          )}
+            {/* channelDetails */}
+            {channelDetails && (
+              <ChannelDetails
+                data={channelDetails[0]}
+                videoDetails={videoDetails[0]}
+              />
+            )}
 
-          {/* comment section */}
-          {commentsDetails && (
-            <div className="448px:ml-14 ml-2 mt-4 pb-2 448px:pr-0 pr-2">
-              <p className="448px:text-[16px] text-[12px]">
-                {videoDetails
-                  ? videoDetails[0].snippet.description.slice(0, 250) + "..."
-                  : ""}
-              </p>
+            {/* comment section */}
+            {commentsDetails && (
+              <div className="448px:ml-14 ml-2 mt-4 pb-2 448px:pr-0 pr-2">
+                <p className="448px:text-[16px] text-[12px]">
+                  {videoDetails
+                    ? videoDetails[0].snippet.description.slice(0, 250) + "..."
+                    : ""}
+                </p>
 
-              {commentOn && (
-                <CommentSec
-                  videoDetails={videoDetails[0]}
-                  commentsDetails={commentsDetails}
-                />
-              )}
-            </div>
-          )}
+                {commentOn && (
+                  <CommentSec
+                    videoDetails={videoDetails[0]}
+                    commentsDetails={commentsDetails}
+                  />
+                )}
+              </div>
+            )}
+          </div>
+
+          <PlayList categoryId={categoryId} />
         </div>
-
-        <PlayList categoryId={categoryId} />
-      </div>
-      {/* <SearchedContent
-            debouncedQuery={debouncedQuery}
-            setQuery={setQuery}
-          /> */}
+      ) : (
+        <SearchedContent />
+      )}
     </>
   );
 }
