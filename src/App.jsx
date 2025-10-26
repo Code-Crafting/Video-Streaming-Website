@@ -7,8 +7,6 @@ import { SearchContext } from "./contexts/SearchContext";
 import { HideText } from "./contexts/HideText";
 
 function App() {
-  // const [query, setQuery] = useState("");
-  // const [debouncedQuery, setDebouncedQuery] = useState("");
   const [hideAsideText, setHideAsideText] = useState(false);
 
   return (
@@ -17,7 +15,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/player/:id/:categoryId" element={<Player />} /> */}
+          <Route path="/player/:id/:categoryId" element={<Player />} />
         </Routes>
       </HideText.Provider>
     </>

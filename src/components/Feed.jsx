@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import FeedShrimmer from "../ui/Shrimmer/FeedShrimmer";
 import Card from "../ui/Card";
+import { useFetch } from "../hooks/useFetch";
 
 function Feed({ categoryId }) {
-  const [data, setData] = useState(null);
+  const [data, fetchData] = useFetch(null);
 
   useEffect(() => {
-    fetch(
-      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=${categoryId}&key=${
-        import.meta.env.VITE_API_KEY
-      }`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data.items);
-      });
+    fetchData(
+      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=${categoryId}`
+    );
   }, [categoryId]);
 
   return (
