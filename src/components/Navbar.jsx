@@ -1,18 +1,15 @@
-import { BiMenuAltLeft } from "react-icons/bi";
 import logoDark from "../assets/logo/logoDark.png";
 import logoWhite from "../assets/logo/logoWhite.png";
 import { IoSearchOutline } from "react-icons/io5";
 import userProfile from "../assets/navbar/user_profile.jpg";
-import { Link, useParams } from "react-router";
+import { Link } from "react-router";
 import { navRightItems } from "../constants/navRightItems";
-import { useContext, useEffect } from "react";
-import { HideText } from "../contexts/HideText";
+import { useContext } from "react";
 import { BsFillSunFill } from "react-icons/bs";
 import { HiMoon } from "react-icons/hi";
 import { Theme } from "../contexts/Theme";
 
-function Navbar({ query, setQuery, showMenubar }) {
-  const [_, setHideAsideText] = useContext(HideText);
+function Navbar({ query, setQuery }) {
   const [isDark, setIsDark] = useContext(Theme);
   const commonThemeStyle = `sm:text-2xl text-xl cursor-pointer ${
     isDark ? "text-white" : "text-gray-500"
@@ -24,24 +21,13 @@ function Navbar({ query, setQuery, showMenubar }) {
     >
       <div className=" flex justify-between items-center sm:py-4 py-3 sm:px-4 px-2">
         {/* left */}
-        <div className="flex gap-4 items-center">
-          {showMenubar && (
-            <BiMenuAltLeft
-              className={`text-2xl ${
-                isDark ? "text-white" : "text-gray-600"
-              } cursor-pointer md:block hidden`}
-              onClick={() => setHideAsideText((prev) => !prev)}
-            />
-          )}
-
-          <Link to="/">
-            <img
-              src={isDark ? logoWhite : logoDark}
-              alt="logo"
-              className="sm:w-36 448px:w-28 w-24 hover:cursor-pointer"
-            />
-          </Link>
-        </div>
+        <Link to="/">
+          <img
+            src={isDark ? logoWhite : logoDark}
+            alt="logo"
+            className="sm:w-36 448px:w-28 w-24 hover:cursor-pointer"
+          />
+        </Link>
 
         {/* middle */}
         <div
@@ -54,7 +40,7 @@ function Navbar({ query, setQuery, showMenubar }) {
             type="text"
             value={query}
             placeholder="Search"
-            className={`w-full outline-none hover:cursor-pointer text-[12px] 448px:text-[16px] ${
+            className={`w-full outline-none text-[12px] 448px:text-[16px] ${
               isDark && "placeholder:text-secondary text-secondary"
             }`}
             onChange={(e) => setQuery(e.target.value)}

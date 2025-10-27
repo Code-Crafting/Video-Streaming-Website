@@ -7,7 +7,6 @@ import { Theme } from "../contexts/Theme";
 
 function Feed({ categoryId }) {
   const [data, fetchData] = useFetch(null);
-  const [, , setShowMenubar] = useContext(SearchContext);
 
   useEffect(() => {
     // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -44,7 +43,6 @@ function Feed({ categoryId }) {
                 channelTitle={channelTitle}
                 viewCount={viewCount}
                 publishedAt={publishedAt}
-                fn={() => setShowMenubar(false)}
               />
             );
           })

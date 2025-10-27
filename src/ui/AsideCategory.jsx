@@ -1,9 +1,7 @@
 import { useContext } from "react";
-import { HideText } from "../contexts/HideText";
 import { Theme } from "../contexts/Theme";
 
 const AsideCategory = ({ data, setActiveId, activeId }) => {
-  const [hideAsideText] = useContext(HideText);
   const [isDark] = useContext(Theme);
   const { id, icon: Icon, name } = data;
   return (
@@ -26,7 +24,7 @@ const AsideCategory = ({ data, setActiveId, activeId }) => {
         onClick={() => setActiveId(id)}
         className={`hover:cursor-pointer ${
           isDark ? "text-white" : "text-gray-600"
-        } ${hideAsideText && "hidden"}`}
+        }`}
       >
         {name}
       </p>

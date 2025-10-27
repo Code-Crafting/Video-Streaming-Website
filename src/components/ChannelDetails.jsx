@@ -2,7 +2,7 @@ import { addViewsSuffix } from "../lib/addViewsSuffix";
 
 const ChannelDetails = ({ data, videoDetails }) => {
   return (
-    <div className="flex 370px:flex-row flex-col 370px:items-center justify-between mt-4 sm:px-0 px-2 gap-4">
+    <div className="flex items-center justify-between mt-4 sm:px-0 px-2 gap-4">
       <div className={`flex gap-3 items-center`}>
         {data ? (
           <img

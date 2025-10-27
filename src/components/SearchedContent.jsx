@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import FeedShrimmer from "../ui/Shrimmer/FeedShrimmer";
-import { Link } from "react-router";
 import { getRandomId } from "../lib/getRandomId";
 import { SearchContext } from "../contexts/SearchContext";
 import { useFetch } from "../hooks/useFetch";

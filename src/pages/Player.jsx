@@ -57,15 +57,12 @@ function Player() {
             <Video id={id} />
 
             {/* video details */}
-            {videoDetails ? (
+            {videoDetails && (
               <VideoDetails
                 data={videoDetails[0]}
                 setCommentOn={setCommentOn}
               />
-            ) : (
-              <div className="h-[50px] bg-gray-600"></div>
             )}
-            {/* <div className="h-[50px] bg-gray-600"></div> */}
 
             <hr
               className={`mt-4 rounded-md ${

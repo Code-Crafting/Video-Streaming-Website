@@ -33,6 +33,7 @@ function PlayList({ categoryId }) {
 
           return (
             <Card
+              key={id}
               id={id}
               categoryId={el.snippet.categoryId}
               fn={() => window.scrollTo({ top: 0, behavior: "smooth" })}
