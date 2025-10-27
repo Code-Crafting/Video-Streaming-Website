@@ -1,14 +1,18 @@
 import { useContext } from "react";
 import { HideText } from "../contexts/HideText";
+import { Theme } from "../contexts/Theme";
 
 const AsideCategory = ({ data, setActiveId, activeId }) => {
   const [hideAsideText] = useContext(HideText);
+  const [isDark] = useContext(Theme);
   const { id, icon: Icon, name } = data;
   return (
     <div className="flex gap-4 items-center" id={id}>
       <div className="relative">
         <Icon
-          className="text-xl cursor-pointer text-gray-600"
+          className={`text-xl cursor-pointer ${
+            isDark ? "text-white" : "text-gray-600"
+          }`}
           onClick={() => setActiveId(id)}
         />
         <div
@@ -20,9 +24,9 @@ const AsideCategory = ({ data, setActiveId, activeId }) => {
 
       <p
         onClick={() => setActiveId(id)}
-        className={`hover:cursor-pointer text-gray-600 ${
-          hideAsideText && "hidden"
-        }`}
+        className={`hover:cursor-pointer ${
+          isDark ? "text-white" : "text-gray-600"
+        } ${hideAsideText && "hidden"}`}
       >
         {name}
       </p>

@@ -1,5 +1,6 @@
 import { BiMenuAltLeft } from "react-icons/bi";
-import logo from "../assets/logo/logo.png";
+import logoDark from "../assets/logo/logoDark.png";
+import logoWhite from "../assets/logo/logoWhite.png";
 import { IoSearchOutline } from "react-icons/io5";
 import userProfile from "../assets/navbar/user_profile.jpg";
 import { Link, useParams } from "react-router";
@@ -7,41 +8,64 @@ import { navRightItems } from "../constants/navRightItems";
 import { useContext, useEffect } from "react";
 import { HideText } from "../contexts/HideText";
 import { BsFillSunFill } from "react-icons/bs";
+import { HiMoon } from "react-icons/hi";
+import { Theme } from "../contexts/Theme";
 
 function Navbar({ query, setQuery, showMenubar }) {
   const [_, setHideAsideText] = useContext(HideText);
+  const [isDark, setIsDark] = useContext(Theme);
+  const commonThemeStyle = `sm:text-2xl text-xl cursor-pointer ${
+    isDark ? "text-white" : "text-gray-500"
+  }`;
 
   return (
-    <div className="fixed w-full z-1 bg-white ">
+    <div
+      className={`fixed w-full z-1 ${isDark ? "bg-primary" : "bg-white"}   `}
+    >
       <div className=" flex justify-between items-center sm:py-4 py-3 sm:px-4 px-2">
         {/* left */}
         <div className="flex gap-4 items-center">
           {showMenubar && (
             <BiMenuAltLeft
-              className="text-2xl text-gray-600 cursor-pointer md:block hidden"
+              className={`text-2xl ${
+                isDark ? "text-white" : "text-gray-600"
+              } cursor-pointer md:block hidden`}
               onClick={() => setHideAsideText((prev) => !prev)}
             />
           )}
 
           <Link to="/">
             <img
-              src={logo}
+              src={isDark ? logoWhite : logoDark}
               alt="logo"
-              className="sm:w-[96px] w-[80px]  hover:cursor-pointer"
+              className="sm:w-36 448px:w-28 w-24 hover:cursor-pointer"
             />
           </Link>
         </div>
 
         {/* middle */}
-        <div className="flex items-center gap-2 sm:w-sm 448px:w-3xs 370px:w-44 w-36 sm:h-[32px] h-[28px] border-gray-600 border rounded-2xl sm:px-4 px-2 ">
+        <div
+          className={`flex items-center gap-2 sm:w-sm 448px:w-3xs 370px:w-44 w-36 ${
+            isDark ? "border-secondary" : "border-gray-600"
+          } border rounded-2xl sm:px-4 px-2 py-1`}
+        >
           <input
+            id="search"
             type="text"
             value={query}
             placeholder="Search"
-            className="w-full outline-none hover:cursor-pointer text-[12px] 448px:text-[16px]"
+            className={`w-full outline-none hover:cursor-pointer text-[12px] 448px:text-[16px] ${
+              isDark && "placeholder:text-secondary text-secondary"
+            }`}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <IoSearchOutline className="sm:text-2xl text-xl text-gray-400 hover:text-red-600 cursor-pointer" />
+          <label htmlFor="search">
+            <IoSearchOutline
+              className={`sm:text-2xl text-xl ${
+                isDark ? "text-secondary" : "text-gray-400"
+              } hover:text-red-600 cursor-pointer`}
+            />
+          </label>
         </div>
 
         {/* right */}
@@ -49,9 +73,9 @@ function Navbar({ query, setQuery, showMenubar }) {
           {navRightItems.items.map(({ id, icon: Icon, style }) => (
             <Icon
               key={id}
-              className={`${navRightItems.commonStyle} ${
-                style && style
-              } text-gray-500`}
+              className={`${navRightItems.commonStyle} ${style && style} ${
+                isDark && !style ? "text-white" : "text-gray-500"
+              }`}
             />
           ))}
           <img
@@ -59,7 +83,17 @@ function Navbar({ query, setQuery, showMenubar }) {
             alt="userProfile"
             className="rounded-full sm:w-6 w-5 aspect-square  hover:cursor-pointer"
           />
-          <BsFillSunFill className="sm:text-2xl text-xl cursor-pointer text-gray-500" />
+          {isDark ? (
+            <BsFillSunFill
+              className={commonThemeStyle}
+              onClick={() => setIsDark((prev) => !prev)}
+            />
+          ) : (
+            <HiMoon
+              className={commonThemeStyle}
+              onClick={() => setIsDark((prev) => !prev)}
+            />
+          )}
         </div>
       </div>
     </div>

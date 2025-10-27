@@ -5,9 +5,10 @@ import SearchedContent from "../components/SearchedContent";
 import PlayList from "../components/PlayLIst";
 import Video from "../ui/Video";
 import { useFetch } from "../hooks/useFetch";
-import VideoDetails from "../ui/VideoDetails";
-import ChannelDetails from "../ui/ChannelDetails";
+import VideoDetails from "../components/VideoDetails";
+import ChannelDetails from "../components/ChannelDetails";
 import { SearchContext } from "../contexts/SearchContext";
+import { Theme } from "../contexts/Theme";
 
 function Player() {
   const { id, categoryId } = useParams();
@@ -16,6 +17,7 @@ function Player() {
   const [commentsDetails, fetchCommentData] = useFetch(null);
   const [commentOn, setCommentOn] = useState(false);
   const [debouncedQuery] = useContext(SearchContext);
+  const [isDark] = useContext(Theme);
 
   // getting video details
   useEffect(() => {
@@ -43,20 +45,27 @@ function Player() {
   }, [videoDetails]);
 
   return (
-    <>
+    <div className={`${isDark && "bg-primary"}`}>
       {!debouncedQuery ? (
-        <div className="max-w-7xl h-dvh mx-auto grid lg:grid-cols-[60%_40%] sm:pt-24 pt-16 gap-4 sm:px-6">
-          <div className=" no-scrollbar lg:overscroll-y-auto">
+        <div
+          className={`max-w-7xl h-dvh mx-auto grid lg:grid-cols-[60%_40%] sm:pt-24 pt-16 gap-4 sm:px-6 ${
+            isDark && "text-white"
+          }`}
+        >
+          <div className="no-scrollbar lg:overflow-y-auto">
             {/* video */}
             <Video id={id} />
 
             {/* video details */}
-            {videoDetails && (
+            {videoDetails ? (
               <VideoDetails
                 data={videoDetails[0]}
                 setCommentOn={setCommentOn}
               />
+            ) : (
+              <div className="h-[50px] bg-gray-600"></div>
             )}
+            {/* <div className="h-[50px] bg-gray-600"></div> */}
 
             <hr className={`mt-4 rounded-md text-gray-600`} />
 
@@ -92,7 +101,7 @@ function Player() {
       ) : (
         <SearchedContent />
       )}
-    </>
+    </div>
   );
 }
 

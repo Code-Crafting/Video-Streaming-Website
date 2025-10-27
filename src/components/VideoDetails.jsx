@@ -2,7 +2,7 @@ import { addViewsSuffix } from "../lib/addViewsSuffix";
 import { BiSolidLike, BiSolidDislike, BiSolidSave } from "react-icons/bi";
 import { MdModeComment } from "react-icons/md";
 import { IoIosShareAlt } from "react-icons/io";
-import VideoReview from "./VideoReview";
+import VideoReview from "../ui/VideoReview";
 import { getReadableDate } from "../lib/getReadableData";
 
 const VideoDetails = ({ data, setCommentOn }) => {

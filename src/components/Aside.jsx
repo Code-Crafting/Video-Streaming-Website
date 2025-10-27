@@ -4,13 +4,15 @@ import { subscribedChannels } from "../constants/suscribedChannels";
 import { category } from "../constants/category";
 import SubscribedChannels from "../ui/SubscribedChannels";
 import { HideText } from "../contexts/HideText";
+import { Theme } from "../contexts/Theme";
 
 function Aside({ activeId, setActiveId }) {
   const [hideAsideText] = useContext(HideText);
+  const [isDark] = useContext(Theme);
 
   return (
     <div
-      className={`h-dvh bg-white ${
+      className={`h-dvh ${isDark ? "bg-primary" : "bg-white"} ${
         !hideAsideText ? "w-56" : "min-w-max"
       } md:flex hidden pb-4 pt-20 px-4 flex-col gap-4 overflow-y-scroll no-scrollbar overscroll-auto 848px:flex`}
     >
@@ -30,9 +32,9 @@ function Aside({ activeId, setActiveId }) {
 
       {/* subscribed channels */}
       <p
-        className={`${
-          hideAsideText && "hidden"
-        } text-gray-600 tracking-wide font-medium`}
+        className={`${hideAsideText && "hidden"} ${
+          isDark ? "text-white" : "text-gray-600"
+        } tracking-wide font-medium`}
       >
         SUBSCRIBED
       </p>

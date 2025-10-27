@@ -50,15 +50,9 @@ function SearchedContent() {
             })
         ) : (
           <>
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
+            {Array.from({ length: 10 }).map((_, i) => (
+              <FeedShrimmer key={i} />
+            ))}
           </>
         )}
       </div>

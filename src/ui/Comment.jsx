@@ -1,8 +1,11 @@
-import dislike from "../assets/dislike.png";
-import like from "../assets/like.png";
+import { BiSolidLike, BiSolidDislike } from "react-icons/bi";
 import { addViewsSuffix } from "../lib/addViewsSuffix";
+import { Theme } from "../contexts/Theme";
+import { useContext } from "react";
 
 const Comment = ({ data }) => {
+  const [isDark] = useContext(Theme);
+  const commonStyle = `text-lg ${isDark ? "text-white" : "text-gray-500"}`;
   return (
     <div className="flex items-start my-4 gap-4">
       <img
@@ -19,14 +22,13 @@ const Comment = ({ data }) => {
         </p>
         <div className="flex gap-4">
           <div className="flex items-center gap-2">
-            <img src={like} alt="like" className="w-[16px] h-[16px]" />
-            <p className="448px:text-[16px] text-[12px]">
+            <BiSolidLike className={commonStyle} />
+            <p className="448px:text-md text-sm">
               {addViewsSuffix(data.snippet.topLevelComment.snippet.likeCount)}
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <img src={dislike} alt="dislike" className="w-[16px] h-[16px]" />
-            {/* <p></p> */}
+            <BiSolidDislike className={commonStyle} />
           </div>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { Link } from "react-router";
 import { addViewsSuffix } from "../lib/addViewsSuffix";
 import { getReadableDate } from "../lib/getReadableData";
+import { useContext } from "react";
+import { Theme } from "../contexts/Theme";
 
 const Card = ({
   id,
@@ -12,8 +14,13 @@ const Card = ({
   url,
   fn,
 }) => {
+  const [isDark] = useContext(Theme);
   return (
-    <Link to={`/player/${id}/${categoryId}`} onClick={fn}>
+    <Link
+      to={`/player/${id}/${categoryId}`}
+      onClick={fn}
+      className={`${isDark && "text-white"}`}
+    >
       <div className="aspect-video overflow-hidden sm:rounded-sm">
         <img
           src={url}

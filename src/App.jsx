@@ -5,15 +5,17 @@ import { lazy, Suspense, useState } from "react";
 import { SearchContext } from "./contexts/SearchContext";
 import { HideText } from "./contexts/HideText";
 import { useDebounce } from "./hooks/useDebounce";
+import { Theme } from "./contexts/Theme";
 const Player = lazy(() => import("./pages/Player"));
 
 function App() {
   const [hideAsideText, setHideAsideText] = useState(false);
   const [query, debouncedQuery, setQuery] = useDebounce();
   const [showMenubar, setShowMenubar] = useState(true);
+  const [isDark, setIsDark] = useState(false);
 
   return (
-    <>
+    <Theme.Provider value={[isDark, setIsDark]}>
       <HideText.Provider value={[hideAsideText, setHideAsideText]}>
         <Navbar query={query} setQuery={setQuery} showMenubar={showMenubar} />
         <SearchContext.Provider
@@ -32,7 +34,7 @@ function App() {
           </Routes>
         </SearchContext.Provider>
       </HideText.Provider>
-    </>
+    </Theme.Provider>
   );
 }
 

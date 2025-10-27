@@ -1,10 +1,17 @@
+import { useContext } from "react";
 import { addViewsSuffix } from "../lib/addViewsSuffix";
 import Comment from "../ui/Comment";
+import { Theme } from "../contexts/Theme";
 
 function CommentSec({ videoDetails, commentsDetails }) {
+  const [isDark] = useContext(Theme);
   return (
     <div>
-      <hr className="my-2 text-gray-600 rounded-md" />
+      <hr
+        className={`my-2 ${
+          isDark ? "text-secondary" : "text-gray-600"
+        } rounded-md`}
+      />
       <h1 className="448px:text-[16px] text-[14px]">
         {addViewsSuffix(
           videoDetails ? videoDetails.statistics.commentCount : 0

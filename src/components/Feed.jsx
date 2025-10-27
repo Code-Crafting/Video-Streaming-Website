@@ -3,6 +3,7 @@ import FeedShrimmer from "../ui/Shrimmer/FeedShrimmer";
 import Card from "../ui/Card";
 import { useFetch } from "../hooks/useFetch";
 import { SearchContext } from "../contexts/SearchContext";
+import { Theme } from "../contexts/Theme";
 
 function Feed({ categoryId }) {
   const [data, fetchData] = useFetch(null);
@@ -48,15 +49,9 @@ function Feed({ categoryId }) {
           })
         ) : (
           <>
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
-            <FeedShrimmer />
+            {Array.from({ length: 10 }).map((_, i) => (
+              <FeedShrimmer key={i} />
+            ))}
           </>
         )}
       </div>

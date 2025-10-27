@@ -55,18 +55,9 @@ function PlayList({ categoryId }) {
         })
       ) : (
         <>
-          <PlayListShrimmer />
-          <PlayListShrimmer />
-          <PlayListShrimmer />
-          <PlayListShrimmer />
-          <PlayListShrimmer />
-          <PlayListShrimmer />
-          <PlayListShrimmer />
-          <PlayListShrimmer />
-          <PlayListShrimmer />
-          <PlayListShrimmer />
-          <PlayListShrimmer />
-          <PlayListShrimmer />
+          {Array.from({ length: 10 }).map((_, i) => (
+            <PlayListShrimmer key={i} />
+          ))}
         </>
       )}
     </div>
