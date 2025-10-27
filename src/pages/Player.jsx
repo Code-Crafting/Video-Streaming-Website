@@ -45,10 +45,10 @@ function Player() {
   }, [videoDetails]);
 
   return (
-    <div className={`${isDark && "bg-primary"}`}>
+    <div className={`${isDark ? "bg-primary" : "bg-white"}`}>
       {!debouncedQuery ? (
         <div
-          className={`max-w-7xl h-dvh mx-auto grid lg:grid-cols-[60%_40%] sm:pt-24 pt-16 gap-4 sm:px-6 ${
+          className={`max-w-7xl lg:h-dvh mx-auto grid lg:grid-cols-[60%_40%] sm:pt-24 pt-18 gap-4 sm:px-6 ${
             isDark && "text-white"
           }`}
         >
@@ -67,7 +67,11 @@ function Player() {
             )}
             {/* <div className="h-[50px] bg-gray-600"></div> */}
 
-            <hr className={`mt-4 rounded-md text-gray-600`} />
+            <hr
+              className={`mt-4 rounded-md ${
+                isDark ? "text-secondary" : "text-gray-600"
+              }`}
+            />
 
             {/* channelDetails */}
             {channelDetails && (
@@ -80,7 +84,7 @@ function Player() {
             {/* comment section */}
             {commentsDetails && (
               <div className="448px:ml-14 ml-2 mt-4 pb-2 448px:pr-0 pr-2">
-                <p className="448px:text-[16px] text-[12px]">
+                <p className="512px:text-md text-sm">
                   {videoDetails
                     ? videoDetails[0].snippet.description.slice(0, 250) + "..."
                     : ""}

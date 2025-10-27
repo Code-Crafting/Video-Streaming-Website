@@ -12,7 +12,7 @@ function CommentSec({ videoDetails, commentsDetails }) {
           isDark ? "text-secondary" : "text-gray-600"
         } rounded-md`}
       />
-      <h1 className="448px:text-[16px] text-[14px]">
+      <h1>
         {addViewsSuffix(
           videoDetails ? videoDetails.statistics.commentCount : 0
         )}

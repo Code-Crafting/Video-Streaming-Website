@@ -10,6 +10,7 @@ function Feed({ categoryId }) {
   const [, , setShowMenubar] = useContext(SearchContext);
 
   useEffect(() => {
+    // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     fetchData(
       `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=${categoryId}`
     );
@@ -17,7 +18,7 @@ function Feed({ categoryId }) {
 
   return (
     <div className="2500px:w-[2200px] 2500px:mx-auto w-full sm:px-4 h-dvh overflow-y-auto no-scrollbar">
-      <div className=" grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 sm:pt-20 pt-16">
+      <div className=" grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 pt-6 md:pt-20">
         {data ? (
           data.map((el) => {
             const {

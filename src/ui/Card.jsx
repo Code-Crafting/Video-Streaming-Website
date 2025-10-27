@@ -13,34 +13,55 @@ const Card = ({
   publishedAt,
   url,
   fn,
+  isFlexRow = false,
 }) => {
   const [isDark] = useContext(Theme);
+  const commontStyle = isDark ? "text-secondary" : "text-primary";
+
   return (
     <Link
       to={`/player/${id}/${categoryId}`}
       onClick={fn}
-      className={`${isDark && "text-white"}`}
+      className={
+        isFlexRow &&
+        "flex lg:flex-row flex-col lg:items-center items-start gap-4 w-full"
+      }
     >
-      <div className="aspect-video overflow-hidden sm:rounded-sm">
+      <div
+        className={`${
+          isFlexRow && "lg:w-1/2 w-full"
+        } aspect-video overflow-hidden sm:rounded-sm`}
+      >
         <img
           src={url}
           alt="thumbnails"
           className="w-full h-full hover:cursor-pointer"
         />
       </div>
-      <div className="flex flex-col items-between mt-4 gap-1">
-        <h1 className="font-bold 448px:text-[16px] text-[14px]">{title}</h1>
-        <p className="font-medium tracking-wide 448px:text-[16px] text-[14px]">
+      <div
+        className={`${
+          isFlexRow && "lg:w-1/2 w-full"
+        } flex flex-col items-between gap-1 px-2 break-all`}
+      >
+        <h1
+          className={`font-bold text-xl 512px:text-lg ${
+            isDark && "text-white"
+          }`}
+        >
+          {title}
+        </h1>
+        <p
+          className={`font-medium tracking-wide 512px:text-[16px] text-lg ${commontStyle}`}
+        >
           {channelTitle}
         </p>
-        {viewCount && publishedAt && (
-          <div className="flex gap-4">
-            <p className="448px:text-[16px] text-[14px]">
-              {addViewsSuffix(viewCount ? viewCount : 0)} views &bull;{" "}
-              {getReadableDate(publishedAt)}
-            </p>
-          </div>
-        )}
+        <div className="flex gap-4">
+          <p className={`512px:text-[16px] text-lg ${commontStyle}`}>
+            {viewCount && addViewsSuffix(viewCount ? viewCount : 0)} views
+            {publishedAt && <span> &bull;</span>}{" "}
+            {publishedAt && getReadableDate(publishedAt)}
+          </p>
+        </div>
       </div>
     </Link>
   );

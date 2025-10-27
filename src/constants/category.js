@@ -1,4 +1,4 @@
-import { AiFillHome } from "react-icons/ai";
+import { RiApps2Line } from "react-icons/ri";
 import { IoGameController, IoNewspaper } from "react-icons/io5";
 import { FaCarSide } from "react-icons/fa";
 import {
@@ -10,7 +10,7 @@ import { GrTechnology } from "react-icons/gr";
 import { GiVideoConference } from "react-icons/gi";
 
 export const category = [
-  { name: "Home", icon: AiFillHome, id: 0 },
+  { name: "All", icon: RiApps2Line, id: 0 },
   { name: "Gaming", icon: IoGameController, id: 20 },
   { name: "Automobiles", icon: FaCarSide, id: 2 },
   { name: "Sports", icon: MdOutlineSportsBasketball, id: 17 },
