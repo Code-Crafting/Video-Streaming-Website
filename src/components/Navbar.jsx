@@ -41,7 +41,7 @@ function Navbar({ query, setQuery }) {
             value={query}
             placeholder="Search"
             className={`w-full outline-none text-[12px] 448px:text-[16px] ${
-              isDark && "placeholder:text-secondary text-secondary"
+              isDark ? "placeholder:text-secondary text-secondary" : ""
             }`}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -59,7 +59,7 @@ function Navbar({ query, setQuery }) {
           {navRightItems.items.map(({ id, icon: Icon, style }) => (
             <Icon
               key={id}
-              className={`${navRightItems.commonStyle} ${style && style} ${
+              className={`${navRightItems.commonStyle} ${style ? style : ""} ${
                 isDark && !style ? "text-white" : "text-gray-500"
               }`}
             />
@@ -72,12 +72,12 @@ function Navbar({ query, setQuery }) {
           {isDark ? (
             <BsFillSunFill
               className={commonThemeStyle}
-              onClick={() => setIsDark((prev) => !prev)}
+              onClick={() => setIsDark(!isDark)}
             />
           ) : (
             <HiMoon
               className={commonThemeStyle}
-              onClick={() => setIsDark((prev) => !prev)}
+              onClick={() => setIsDark(!isDark)}
             />
           )}
         </div>

@@ -4,10 +4,11 @@ import { getRandomId } from "../lib/getRandomId";
 import { SearchContext } from "../contexts/SearchContext";
 import { useFetch } from "../hooks/useFetch";
 import Card from "../ui/Card";
+import { categoryIds } from "../constants/categoryIds";
 
 function SearchedContent() {
   const [debouncedQuery, setQuery] = useContext(SearchContext);
-  const [data, fetchData] = useFetch(null);
+  const [data, fetchData] = useFetch(debouncedQuery);
 
   useEffect(() => {
     if (debouncedQuery) {
@@ -39,7 +40,7 @@ function SearchedContent() {
                 <Card
                   key={i}
                   id={el.id.videoId}
-                  categoryId={getRandomId([0, 20, 2, 17, 24, 28, 10, 22, 25])}
+                  categoryId={getRandomId(categoryIds)}
                   title={title}
                   channelTitle={channelTitle}
                   url={url}

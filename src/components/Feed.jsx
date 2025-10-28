@@ -2,14 +2,11 @@ import { useContext, useEffect } from "react";
 import FeedShrimmer from "../ui/Shrimmer/FeedShrimmer";
 import Card from "../ui/Card";
 import { useFetch } from "../hooks/useFetch";
-import { SearchContext } from "../contexts/SearchContext";
-import { Theme } from "../contexts/Theme";
 
 function Feed({ categoryId }) {
-  const [data, fetchData] = useFetch(null);
+  const [data, fetchData] = useFetch(categoryId);
 
   useEffect(() => {
-    // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     fetchData(
       `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=${categoryId}`
     );

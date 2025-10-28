@@ -5,7 +5,7 @@ import { IoIosShareAlt } from "react-icons/io";
 import VideoReview from "../ui/VideoReview";
 import { getReadableDate } from "../lib/getReadableData";
 
-const VideoDetails = ({ data, setCommentOn }) => {
+const VideoDetails = ({ data, fn }) => {
   return (
     <div className="flex flex-col items-between mt-4 sm:gap-4 gap-2 sm:px-0 px-2">
       <h1 className="sm:text-2xl text-lg font-bold">{data.snippet?.title}</h1>
@@ -26,7 +26,7 @@ const VideoDetails = ({ data, setCommentOn }) => {
           <VideoReview
             icon={MdModeComment}
             stats={addViewsSuffix(data ? data.statistics.commentCount : 0)}
-            onClick={() => setCommentOn((prev) => !prev)}
+            onClick={fn}
           />
           <VideoReview icon={IoIosShareAlt} stats="Share" />
           <VideoReview icon={BiSolidSave} stats="Save" />

@@ -1,13 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import PlayListShrimmer from "../ui/Shrimmer/PlaylistShrimmer";
 import { useFetch } from "../hooks/useFetch";
 import Card from "../ui/Card";
-import { Theme } from "../contexts/Theme";
+import { categoryIds } from "../constants/categoryIds";
 
 function PlayList({ categoryId }) {
-  const [data, fetchPlaylistData] = useFetch();
-  const [isDark] = useContext(Theme);
-  const commontStyle = isDark ? "text-secondary" : "text-gray-600";
+  const [data, fetchPlaylistData] = useFetch(categoryId);
 
   useEffect(() => {
     fetchPlaylistData(
@@ -15,10 +13,17 @@ function PlayList({ categoryId }) {
     );
   }, [categoryId]);
 
+  const handleFilter = (d) => {
+    const filterdData = d.filter((el) =>
+      categoryIds.some((id) => id === el.snippet.categoryId)
+    );
+    return filterdData;
+  };
+
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-3 no-scrollbar lg:overflow-y-auto pb-2">
       {data ? (
-        data.map((el) => {
+        handleFilter(data).map((el, i) => {
           const {
             snippet: {
               channelTitle,

@@ -9,15 +9,17 @@ import VideoDetails from "../components/VideoDetails";
 import ChannelDetails from "../components/ChannelDetails";
 import { SearchContext } from "../contexts/SearchContext";
 import { Theme } from "../contexts/Theme";
+import Loading from "../ui/Loading";
 
 function Player() {
   const { id, categoryId } = useParams();
-  const [videoDetails, fetchVideosData] = useFetch(null);
-  const [channelDetails, fetchChannelData] = useFetch(null);
-  const [commentsDetails, fetchCommentData] = useFetch(null);
+  const [videoDetails, fetchVideosData] = useFetch(id);
+  const [channelDetails, fetchChannelData] = useFetch(id);
+  const [commentsDetails, fetchCommentData] = useFetch(id);
   const [commentOn, setCommentOn] = useState(false);
   const [debouncedQuery] = useContext(SearchContext);
   const [isDark] = useContext(Theme);
+  const [commentLoading, setCommentLoading] = useState(false);
 
   // getting video details
   useEffect(() => {
@@ -28,12 +30,15 @@ function Player() {
 
   // getting comment details
   useEffect(() => {
-    if (commentOn) {
+    if (commentOn && !commentsDetails) {
+      setCommentLoading(true);
       fetchCommentData(
         `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2C%20replies&maxResults=50&videoId=${id}`
       );
+    } else {
+      setCommentLoading(false);
     }
-  }, [commentOn]);
+  }, [commentOn, commentsDetails]);
 
   // getting channel details
   useEffect(() => {
@@ -49,7 +54,7 @@ function Player() {
       {!debouncedQuery ? (
         <div
           className={`max-w-7xl lg:h-dvh mx-auto grid lg:grid-cols-[60%_40%] sm:pt-24 pt-18 gap-4 sm:px-6 ${
-            isDark && "text-white"
+            isDark ? "text-white" : ""
           }`}
         >
           <div className="no-scrollbar lg:overflow-y-auto">
@@ -60,7 +65,7 @@ function Player() {
             {videoDetails && (
               <VideoDetails
                 data={videoDetails[0]}
-                setCommentOn={setCommentOn}
+                fn={() => setCommentOn((prev) => !prev)}
               />
             )}
 
@@ -79,20 +84,22 @@ function Player() {
             )}
 
             {/* comment section */}
-            {commentsDetails && (
+            {commentLoading && (
+              <div className=" relative">
+                <Loading divHeight="h-16" />
+              </div>
+            )}
+            {commentsDetails && commentOn && (
               <div className="448px:ml-14 ml-2 mt-4 pb-2 448px:pr-0 pr-2">
                 <p className="512px:text-md text-sm">
                   {videoDetails
                     ? videoDetails[0].snippet.description.slice(0, 250) + "..."
                     : ""}
                 </p>
-
-                {commentOn && (
-                  <CommentSec
-                    videoDetails={videoDetails[0]}
-                    commentsDetails={commentsDetails}
-                  />
-                )}
+                <CommentSec
+                  videoDetails={videoDetails[0]}
+                  commentsDetails={commentsDetails}
+                />
               </div>
             )}
           </div>

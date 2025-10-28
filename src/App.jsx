@@ -6,12 +6,12 @@ import { SearchContext } from "./contexts/SearchContext";
 import { useDebounce } from "./hooks/useDebounce";
 import { Theme } from "./contexts/Theme";
 import Loading from "./ui/Loading";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 const Player = lazy(() => import("./pages/Player"));
 
 function App() {
-  const [hideAsideText, setHideAsideText] = useState(false);
   const [query, debouncedQuery, setQuery] = useDebounce();
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useLocalStorage("isDark", false);
 
   return (
     <Theme.Provider value={[isDark, setIsDark]}>
