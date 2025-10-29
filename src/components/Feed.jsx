@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import FeedShrimmer from "../ui/Shrimmer/FeedShrimmer";
 import Card from "../ui/Card";
 import { useFetch } from "../hooks/useFetch";
+import { filterData } from "../lib/filterData";
 
 function Feed({ categoryId }) {
   const [data, fetchData] = useFetch(categoryId);
@@ -16,7 +17,7 @@ function Feed({ categoryId }) {
     <div className="2500px:w-[2200px] 2500px:mx-auto w-full sm:px-4 h-dvh overflow-y-auto no-scrollbar">
       <div className=" grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 pt-6 md:pt-20">
         {data ? (
-          data.map((el) => {
+          filterData(data).map((el) => {
             const {
               snippet: {
                 channelTitle,

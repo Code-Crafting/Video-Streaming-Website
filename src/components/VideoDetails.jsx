@@ -20,12 +20,16 @@ const VideoDetails = ({ data, fn }) => {
         <div className="flex gap-4">
           <VideoReview
             icon={BiSolidLike}
-            stats={addViewsSuffix(data?.statistics.likeCount)}
+            stats={addViewsSuffix(
+              data.statistics.likeCount ? data.statistics.likeCount : 0
+            )}
           />
           <VideoReview icon={BiSolidDislike} stats="0" />
           <VideoReview
             icon={MdModeComment}
-            stats={addViewsSuffix(data ? data.statistics.commentCount : 0)}
+            stats={addViewsSuffix(
+              data.statistics.commentCount ? data.statistics.commentCount : 0
+            )}
             onClick={fn}
           />
           <VideoReview icon={IoIosShareAlt} stats="Share" />

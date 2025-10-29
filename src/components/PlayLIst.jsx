@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import PlayListShrimmer from "../ui/Shrimmer/PlaylistShrimmer";
 import { useFetch } from "../hooks/useFetch";
 import Card from "../ui/Card";
-import { categoryIds } from "../constants/categoryIds";
+import { filterData } from "../lib/filterData";
 
 function PlayList({ categoryId }) {
   const [data, fetchPlaylistData] = useFetch(categoryId);
@@ -13,17 +13,10 @@ function PlayList({ categoryId }) {
     );
   }, [categoryId]);
 
-  const handleFilter = (d) => {
-    const filterdData = d.filter((el) =>
-      categoryIds.some((id) => id === el.snippet.categoryId)
-    );
-    return filterdData;
-  };
-
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-3 no-scrollbar lg:overflow-y-auto pb-2">
       {data ? (
-        handleFilter(data).map((el, i) => {
+        filterData(data).map((el, i) => {
           const {
             snippet: {
               channelTitle,
