@@ -8,9 +8,11 @@ import { useContext } from "react";
 import { BsFillSunFill } from "react-icons/bs";
 import { HiMoon } from "react-icons/hi";
 import { Theme } from "../contexts/Theme";
+import { SearchContext } from "../contexts/SearchContext";
 
-function Navbar({ query, setQuery }) {
+function Navbar() {
   const [isDark, setIsDark] = useContext(Theme);
+  const [, setQuery, query] = useContext(SearchContext);
   const commonThemeStyle = `sm:text-2xl text-xl cursor-pointer ${
     isDark ? "text-white" : "text-gray-500"
   }`;
